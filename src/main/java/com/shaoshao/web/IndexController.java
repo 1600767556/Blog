@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
  */
 @Controller
 public class IndexController {
-    @GetMapping(value = "/")
+    @GetMapping
     public String Index() {
         //System.out.println(10/0);
       /*  String blog = null;
@@ -26,9 +26,9 @@ public class IndexController {
         System.out.println("----------index------------");
         return "blog";
     }
-    @GetMapping(value = "/blog404")
+    @GetMapping(value = "/admin/index")
     public String Blog404() {
         System.out.println("----------index------------");
-        return "about";
+        return "admin/index";
     }
 }

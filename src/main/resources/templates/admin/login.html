@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:background="http://java.sun.com/JSP/Page">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head th:replace="admin/_fragments :: head(~{::title})">
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -13,16 +13,16 @@
 	<br>
 	<br>
 <div class="m-container-small m-padded-tb-massive" style="max-width: 30em !important;">
-	<div class="ui container">
+	<div class="ur container">
 		<div class="ui middle aligned center aligned grid">
 			<div class="column">
 				<h2 class="ui teal image header">
-					<img src="../../static/images/houtai.jpg" th:src="@{/images/houtai.jpg class="image">
+					<img src="../../static/images/houtai.jpg" th:src="@{/images/houtai.jpg">
 					<div class="content">
 						博客后台管理
 					</div>
 				</h2>
-				<form class="ui large form" method="post">
+				<form class="ui large form" method="post" action="#" th:action="@{/admin/login}">
 					<div class="ui segment">
 						<div class="field">
 							<div class="ui left icon input">
@@ -36,7 +36,7 @@
 								<input type="password" name="password" placeholder="密码">
 							</div>
 						</div>
-						<div class="ui fluid large teal submit button">登录</div>
+						<button class="ui fluid large teal submit button">登  录</button>
 					</div>
 
 					<div class="ui error message"></div>
@@ -48,10 +48,9 @@
 
 	</div>
 </div>
-		<!--/*/<th:block> th:replace="_fragments :: script"/*/-->
+
 		<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
-		<!--/*/	</th:block>/*/-->
 
 
 	</body>
