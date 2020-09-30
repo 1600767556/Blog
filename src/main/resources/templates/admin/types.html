@@ -3,7 +3,7 @@
 <head th:replace="admin/_fragments :: head(~{::title})">
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>博客管理</title>
+	<title>分类管理</title>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
 	<link rel="stylesheet" href="../../static/css/me.css" />
 
@@ -11,12 +11,12 @@
 	<body>
 		
 		<!-- 导航 -->
-		<nav th:replace="admin/_fragments :: meun(1)" class="ui inverted attached segment m-padded-tb-mini m-shadow-small">
+		<nav th:replace="admin/_fragments :: meun(2)" class="ui inverted attached segment m-padded-tb-mini m-shadow-small">
 			<div class="ui container">
 				<div class="ui inverted secondary stackable menu">
 				<h2 class="ui teal header item">管理后台</h2>
 				<a href="#" class="active m-item item m-mobile-hide"><i class="small home icon"></i> 博客</a>
-				<a href="#" class="  m-item item m-mobile-hide"><i class="small idea icon"></i> 分类</a>
+				<a href="#"  class="m-item item m-mobile-hide"><i class="small idea icon"></i> 分类</a>
 				<a href="#" class="m-item item m-mobile-hide"><i class="small tags icon"></i> 标签</a>
 					<div class="right  m-item m-mobile-hide menu">
 						<div class="ui dropdown item">
@@ -40,8 +40,8 @@
 		<div class="ui pointing attached menu">
 			<div class="ui container">
 				<div class="right menu">
-					<a href="#" class="item">发布</a>
-					<a href="#" class=" teal active item">列表</a>
+					<a href="#" th:href="@{/admin/types/input}" class="teal  item">新增</a>
+					<a href="#" th:href="@{/admin/types}" class="  active item">列表</a>
 				</div>
 
 			</div>
@@ -50,71 +50,50 @@
 		<!-- 中间内容 -->
 		<div class="m-container-small m-padded-tb-big">
 			<div class="ui container">
-				<form action="#" method="post" class="ui segment form">
-					<div class="inline fields">
-						<div class="field">
-							<input type="text" name="title" placeholder="标题">
-						</div>
-						<div class="field">
-							<div class="ui selection dropdown">
-								<input type="hidden" name="type">
-								<i class="dropdown icon" ></i>
-								<div class="default text">分类</div>
-								<div class="menu">
-									<div class="item" data-value="1">错误日志</div>
-									<div class="item" data-value="2">开发者手册</div>
-								</div>
-							</div>
-						</div>
-						<div class="field">
-							<div class="ui checkbox">
-								<input type="checkbox" id = "recommend" name="recommend">
-								<label for="recommend" >推荐</label>
-							</div>
-						</div>
-						<div class="ui  teal basic button"><i class="search icon"></i>搜索</div>
-					</div>
-				</form>
-
+				<div class="ui success message" th:unless="${#strings.isEmpty(message)}">
+					<i class="close icon"></i>
+					<div class="header">提示:</div>
+					<p th:text="${message}">恭喜,操作成功!</p>
+				</div>
 				<table class="ui celled table">
 					<thead>
 						<tr>
 							<th></th>
-							<th>标题</th>
-							<th>类型</th>
-							<th>推荐</th>
-							<th>更新时间</th>
+							<th>名称</th>
 							<th>操作</th>
+
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td>1</td>
-							<td>刻意练习</td>
-							<td>认知升级</td>
-							<td>是</td>
-							<td>2020-09-24</td>
+						<tr th:each="type,iterStat : ${page.content}">
+
+							<td th:text="${iterStat.count}">1</td>
+							<td th:text="${type.name}">刻意练习</td>
 							<td>
-								<a href="#" class="ui mini teal basic button">编辑</a>
-								<a href="#" class="ui mini red  basic button">删除</a>
+								<a href="#" th:href="@{/admin/types/{id}/input(id=${type.id})}" class="ui mini teal basic button">编辑</a>
+								<a href="#" th:href="@{/admin/types/{id}/delete(id=${type.id})}"  class="ui mini red  basic button">删除</a>
 							</td>
 						</tr>
 					</tbody>
 					<tfoot>
 					<tr>
 						<th colspan="6">
-							<div class="ui mini pagination menu">
-								<a class="item" >上一页</a>
-								<a class="item" >下一页</a>
+							<div class="ui mini pagination menu" th:if="${page.totalPages}>1">
+								<a th:href="@{/admin/types(page=${page.number}-1)}" class="item" th:unless="${page.first}" >上一页</a>
+								<a th:href="@{/admin/types(page=${page.number}+1)}" class="item" th:unless="${page.last}">下一页</a>
 							</div>
-							<a href="#" class="ui mini right floated teal basic button">新增</a>
+							<a href="#" th:href="@{/admin/types/input}" class="ui mini right floated teal basic button">新增</a>
 						</th>
 					</tr>
 					</tfoot>
 				</table>
 			</div>
 		</div>
-
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
 		<!-- 底部footer -->
 		<footer th:replace="admin/_fragments :: footer" class="ui inverted vertical segment m-padded-tb-massive">
 			<div class="ui center aligned container">
@@ -164,6 +143,13 @@
 			$('.ui.dropdown').dropdown({
 				on:'hover'
 			});
+			//提示消息关闭
+			$('.message .close')
+				.on('click',function () {
+					$(this)
+						.closest('.message')
+						.transition('fade');
+				})
 		</script>
 
 	</body>

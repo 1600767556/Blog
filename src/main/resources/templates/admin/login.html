@@ -17,7 +17,6 @@
 		<div class="ui middle aligned center aligned grid">
 			<div class="column">
 				<h2 class="ui teal image header">
-					<img src="../../static/images/houtai.jpg" th:src="@{/images/houtai.jpg">
 					<div class="content">
 						博客后台管理
 					</div>
@@ -39,8 +38,8 @@
 						<button class="ui fluid large teal submit button">登  录</button>
 					</div>
 
-					<div class="ui error message"></div>
-
+					<div class="ui error mini message"></div>
+						<div class="ui mini negative message" th:unless="${#strings.isEmpty(message)}" th:text="${message}">用户名或密码错误</div>
 				</form>
 
 			</div>
@@ -51,7 +50,26 @@
 
 		<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
-
+<script>
+	$('.ui.form').form({
+		fields: {
+			username: {
+				identifier: 'username',
+				rules: [{
+					type: 'empty',
+					prompt: '请输入用户名'
+				}]
+			},
+			password: {
+				identifier: 'password',
+				rules: [{
+					type: 'empty',
+					prompt: '请输入密码'
+				}]
+			}
+		}
+	})
+</script>
 
 	</body>
 </html>

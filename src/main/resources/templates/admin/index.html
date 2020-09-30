@@ -13,7 +13,7 @@
 		<nav th:replace="admin/_fragments :: meun(0)" class="ui inverted attached segment m-padded-tb-mini m-shadow-small">
 			<div class="ui container">
 				<div class="ui inverted secondary stackable menu">
-				<h2 class="ui teal header item">管理后台</h2>
+				<h2 class="ui teal header item">Blog</h2>
 				<a href="#" class="active m-item item m-mobile-hide"><i class="small home icon"></i> 博客</a>
 				<a href="#" class="  m-item item m-mobile-hide"><i class="small idea icon"></i> 分类</a>
 				<a href="#" class="m-item item m-mobile-hide"><i class="small tags icon"></i> 标签</a>
@@ -38,16 +38,7 @@
 			</a>
 		</nav>
 
-		<div class="ui pointing attached menu">
-			<div class="ui container">
-				<div class="right menu">
-					<a href="#" class="item">发布</a>
-					<a href="#" class=" teal active item">列表</a>
-				</div>
 
-			</div>
-
-		</div>
 		<!-- 中间内容 -->
 		<div class="m-container-small m-padded-tb-big">
 			<div class="ui container">
@@ -100,10 +91,10 @@
 			</div>
 
 		</footer>
-		<!--/*/<th:block> th:replace="_fragments :: script"/*/-->
+
 		<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
-		<!--/*/	</th:block>/*/-->
+
 		<script>
 			$('.menu.toggle').click(function () {
 				$('.m-item').toggleClass('m-mobile-hide');
