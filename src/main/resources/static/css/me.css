@@ -42,6 +42,10 @@ body {
 	padding-top: 5em !important;
 	padding-bottom: 5em !important;
 }
+.m-padded-tb-massives {
+	padding-top: 14em !important;
+	padding-bottom: 14em !important;
+}
 /*-------------text----------*/
 .m-text {
 	font-weight: 300 !important;
