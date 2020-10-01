@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.util.List;
+
 /**
  * @author shaoshao
  * @version 1.0
@@ -41,6 +43,12 @@ public class TypeServiceImpl implements TypeService {
     public Page<Type> listType(Pageable pageable) {
         return typeRespository.findAll(pageable);
     }
+
+    @Override
+    public List<Type> listType() {
+        return typeRespository.findAll();
+    }
+
     @Transactional
     @Override
     public Type updateType(Long id, Type type) {
