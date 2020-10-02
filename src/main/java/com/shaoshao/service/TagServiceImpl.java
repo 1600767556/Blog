@@ -8,10 +8,13 @@ import com.shaoshao.po.Type;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -53,7 +56,29 @@ public class TagServiceImpl implements TagService {
     }
 
     @Override
+    public List<Tag> listTagTop(Integer size) {
+        Sort sort = Sort.by(Sort.Direction.DESC, "blogs.size");
+        Pageable pageable = PageRequest.of(0, size, sort);
+        return tagRespository.findTop(pageable);
+    }
+
+    @Override
+    public List<Tag> listTag(String ids) {
+        return tagRespository.findAllById(converToList(ids));
+    }
+
+    private List<Long> converToList(String ids) {
+        List<Long> list = new ArrayList<>();
+        if (!"".equals(ids) && ids != null) {
+            String [] idaArry = ids.split(",");
+            for (int i = 0; i <idaArry.length; i++) {
+                list.add(new Long(idaArry[i]));
+            }
+        }
+        return list;
+    }
     @Transactional
+    @Override
     public Tag updateTag(Long id, Tag tag) {
         Tag t = tagRespository.findById(id).get();
         if (t == null) {

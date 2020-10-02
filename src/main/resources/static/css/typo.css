@@ -6,6 +6,10 @@
   line-height: 1.8;
   text-align: justify;
 }
+.typo li {
+  font-weight: 300;
+  padding: 4px 0;
+}
 /* 内外边距通常让各个浏览器样式的表现位置不同 */
 typo body,typo dl,typo dt,typo dd,typo ul,typo ol,typo li,typo h1,typo h2,typo h3,typo h4,typo h5,typo h6,typo pre,typo code,
 typo form,typo fieldset,typo legend,typo input,typo textarea,typo p,typo blockquote,typo th,typo td,typo hr,typo button,

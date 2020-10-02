@@ -45,29 +45,31 @@
 				<div class="ui top attached segment">
 					<div class="ui  horizontal link list">
 						<div class="item">
-							<img src="https://unsplash.it/100/100?image=1001" alt="" class="ui avatar image">
-							<div class="content"><a href="#" class="header">胡鑫亮</a></div>
+							<img src="https://unsplash.it/100/100?image=1001" th:src="@{${blog.user.avator}}" alt="" class="ui avatar image">
+							<div class="content"><a href="#" class="header" th:text="${blog.user.nickname}">胡鑫亮</a></div>
 						</div>
 						<div class="item">
-							<i class="calender icon"></i> 2017-10-01
+							<i class="calender icon"></i> <span th:text="${#dates.format(blog.updateTime,'yyyy-MM-dd')}">2017-10-01</span>
 						</div>
 						<div class="item">
-							<i class="eye icon"></i> 1523
+							<i class="eye icon"></i> <span th:text="${blog.views}">1523</span>
+						</div>
 						</div>
 					</div>
 				</div>
 				<div class="ui attached segment">
 					<!--图片-->
-					<img src="https://unsplash.it/800/450?image=1004" alt="" class="ui fluid rounded image">
+					<img src="https://unsplash.it/800/450?image=1004" th:src="@{${blog.firstPicture}}" alt="" class="ui fluid rounded image">
 				</div>
 				<div class="ui  attached padded segment">
 					<!--内容-->
 					<div class="ui right aligned basic segment">
-						<div class="ui orange basic label">原创</div>
+						<div class="ui orange basic label" th:text="${blog.flag}">原创</div>
 					</div>
-					<h2 class="ui center aligned header">关于可以联系</h2>
+
+					<h2 class="ui center aligned header" th:text="${blog.title}">关于可以联系</h2>
 					<br>
-					<div id="content" class=" typo  typo-selection js-toc-content m-padded-lr-responsive m-padded-tb-large">
+					<div id="content" class=" typo  typo-selection js-toc-content m-padded-lr-responsive m-padded-tb-large" th:utext="${blog.content}">
 						<h2 id="tagline" class="serif">一致化浏览器排版效果，构建最适合中文阅读的网页排版</h2>
 							<pre><code>p { color:red}</code></pre>
 							<pre><code class="language-css">p { color:red}</code></pre>
@@ -446,10 +448,11 @@ h5,h6{font-size:1em;}
 					</div>
 					<!--标签-->
 					<div class="m-padded-lr-responsive">
-						<div class="ui basic teal left pointing label">
+						<div class="ui basic teal left pointing label" th:each="tag : ${blog.tags}" th:text="${tag.name}">
 							方法论
 						</div>
 					<!--赞赏-->
+						<div th:if="${blog.appreciation}">
 						<div class="ui center aligned basic segment">
 							<button id="payButton" class="ui orange basic circular button">赞赏</button>
 						</div>
@@ -457,25 +460,25 @@ h5,h6{font-size:1em;}
 							<div class="ui orange basic label">
 								<div class="ui images" style="font-size: inherit !important;">
 									<div class="image">
-										<img src="../static/images/zfb.jpg" alt="" class="ui rounded bordered image" style="width: 120px">
+										<img src="../static/images/zfb.jpg" th:src="@{/images/zfb.jpg}" alt="" class="ui rounded bordered image" style="width: 120px">
 										<div>支付宝</div>
 									</div>
 									<div class="image">
-										<img src="../static/images/wx.jpg" alt="" class="ui rounded bordered image" style="width: 120px">
+										<img src="../static/images/wx.jpg"  th:src="@{/images/wx.jpg}" alt="" class="ui rounded bordered image" style="width: 120px">
 										<div>微信</div>
 									</div>
 								</div>
 							</div>
 						</div>
-
+						</div>
 				</div>
-				<div class="ui attached positive message">
+				<div class="ui attached positive message" th:if="${blog.shareStatement}">
 				<!--博客信息-->
 					<div class="ui middle aligned grid">
 						<div class="eleven wide column">
 							<ui class="list">
-								<li>作者: 胡鑫亮 (联系作者) </li>
-								<li>发表时间: 2020-09-23 </li>
+								<li>作者: <span th:text="${blog.user.nickname}">秋水</span><a href="#" th:href="@{/about}" target="_blank">(联系作者)</a></li>
+								<li>发表时间: <span th:text="${#dates.format(blog.updateTime,'yyyy-MM-dd HH:mm')}">2020-09-23</span></li>
 								<li>版权声明: 自由转载-非商用-非衍生-保持署名 (创意共享3.0许可证) </li>
 								<li>公众号转载: 请在文末添加作者公众号二维码 </li>
 							</ui>
@@ -485,9 +488,9 @@ h5,h6{font-size:1em;}
 						</div>
 					</div>
 				</div>
-				<div id="comment-container" class="ui bottom attached segment">
+				<div id="comment-container" class="ui bottom attached segment" th:if="${blog.commentabled}">
 					<!--留言区域-->
-					<div class="ui teal segment">
+			<!--		<div class="ui teal segment">
 						<div class="ui threaded comments">
 							<h3 class="ui dividing header">Comments</h3>
 							<div class="comment">
@@ -561,7 +564,7 @@ h5,h6{font-size:1em;}
 								</div>
 							</div>
 						</div>
-					</div>
+					</div>-->
 					<div class="ui form">
 						<div class="field">
 							<textarea name="content" placeholder="请输入评论信息..."></textarea>
@@ -602,7 +605,7 @@ h5,h6{font-size:1em;}
 
 			</ol>
 			<div id="qrcode" class="ui wechat-qr flowing popup transition hidden" style="width: 130px !important;">
-				<img src="../static/images/myWeChat.jpg" alt="" class="ui rounded image" style="width: 120px !important;">
+				<!--<img src="../static/images/myWeChat.jpg" alt="" class="ui rounded image" style="width: 120px !important;">-->
 			</div>
 		</div>
 
@@ -647,7 +650,7 @@ h5,h6{font-size:1em;}
 			</div>
 
 		</footer>
-		<!--		/*/<th:block> th:replace="_fragments :: script"/*/-->
+		<!--/*/<th:block th:replace="_fragments :: script">/*/-->
 		<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
 		<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-scrollTo/2.1.2/jquery.scrollTo.min.js"></script>
@@ -656,7 +659,7 @@ h5,h6{font-size:1em;}
 		<script src="../static/lib/qrcode/qrcode.min.js"></script>
 		<script src="../static/lib/waypoints/jquery.waypoints.min.js"></script>
 		<!--/*/	</th:block>/*/-->
-		<script>
+		<script th:inline="javascript">
 
 			$('.menu.toggle').click(function () {
 				$('.m-item').toggleClass('m-mobile-hide');
@@ -673,8 +676,6 @@ h5,h6{font-size:1em;}
 				contentSelector: '.js-toc-content',
 				// Which headings to grab inside of the contentSelector element.
 				headingSelector: 'h1, h2, h3',
-				// For headings inside relative or absolute positioned containers within content.
-				hasInnerContainers: true,
 			});
 			$('.toc.button').popup({
 				popup : $('.toc-container.popup'),
@@ -687,14 +688,16 @@ h5,h6{font-size:1em;}
 				position: 'bottom center'
 			});
 			//自动生成随机二维码
-			/*var qrcode = new QRCode("qrcode", {
-				text: "http://jindo.dev.naver.com/collie",
+			var serurl = /*[[#{blog.serurl}]]*/"127.0.0.1:8080";
+			var url=/*[[@{/blog/{id}(id=${blog.id})}]]*/"";
+			var qrcode = new QRCode("qrcode", {
+				text: serurl+url,
 				width: 110,
 				height: 110,
 				colorDark : "#000000",
 				colorLight : "#ffffff",
 				correctLevel : QRCode.CorrectLevel.H
-			});*/
+			});
 			$('#toTop-button').click(function () {
 				$(window).scrollTo(0,500);
 			});

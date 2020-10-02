@@ -3,14 +3,14 @@
 <head th:replace="_fragments :: head(~{::title})">
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>分类</title>
+		<title>搜索结果</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
 <link rel="stylesheet" href="../static/css/me.css" />
 	</head>
 	<body>
 		
 		<!-- 导航 -->
-		<nav th:replace="_fragments :: meun(2)" class="ui inverted attached segment m-padded-tb-mini m-shadow-small">
+		<nav th:replace="_fragments :: meun(1)" class="ui inverted attached segment m-padded-tb-mini m-shadow-small">
 			<div class="ui container">
 				<div class="ui inverted secondary stackable menu">
 				<h2 class="ui teal header item">Blog</h2>
@@ -41,25 +41,20 @@
 				<div class="ui top attached segment">
 					<div class="ui middle aligned two column grid">
 						<div class="column">
-							<h3 class="ui teal header">分类</h3>
+							<h3 class="ui teal header">搜索结果</h3>
 						</div>
 						<div class="right aligned column">
-							共 <h2 class="ui orange header m-inline-bloke m-text-thin" th:text="${#arrays.length(types)}"> 14 </h2> 篇博客
+							共 <h2 class="ui orange header m-inline-bloke m-text-thin" th:text="${page.totalElements}"> 14 </h2> 篇博客
 						</div>
 					</div>
 				</div>
-				<div class="ui attached segment m-padded-tb-large">
-					<div class="ui labeled button m-margin-tb-tiny" th:each="type : ${types}">
-						<a href="#" th:href="@{/types/{id}(id=${type.id})}" class="ui basic  button" th:classappend="${type.id==activeTypeId} ? 'pink' " th:text="${type.name}">思想与感情</a>
-						<div class="ui basic teal left pointing label" th:classappend="${type.id==activeTypeId} ? 'pink' " th:text="${#arrays.length(type.blogs)}">24</div>
-					</div>
-				</div>
+
 
 				<div class="ui attached top teal segment">
 					<div class="ui padded vertical segment m-padded-tb-large" th:each="blog : ${page.content}">
 						<div class="ui middle aligned mobile reversed stackable grid" >
 							<div class="eleven wide column">
-								<h3 class="ui header"><a href="" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank" class="m-black" th:text="${blog.title}"></a></h3>
+								<h3 class="ui header"><a href="" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank" class="m-black" th:text="${blog.title}"></a>你真的理解什么是财富自由吗?</h3>
 								<p class="m-text" th:text="|${blog.description}......|">aaaaaaaaaaaaaaadd啊啊啊啊啊啊啊啊</p>
 								<div class="ui grid">
 									<div class="eleven wide column">
@@ -90,6 +85,7 @@
 						</div>
 					</div>
 
+
 				</div>
 				<!--footer-->
 				<div class="ui bottom attached segment" th:if="${page.totalPages}>1">
@@ -104,6 +100,7 @@
 				</div>
 			</div>
 		</div>
+		<br>
 
 		<!-- 底部footer -->
 		<footer th:replace="_fragments :: footer" class="ui inverted vertical segment m-padded-tb-massive">
@@ -119,7 +116,7 @@
 					<div class="three wide column">
 						<h4 class="ui inverted header m-text-thin m-text-spaced ">联系我</h4>
 						<div class="ui inverted link list">
-							<a href="#" class="item">Email 1600767556@QQ.com</a>
+							<a href="#" class="item">Email: 1600767556@QQ.com</a>
 							<a href="#" class="item">QQ : 1600767556</a>
 							<a href="#" class="item">WeChat : shoashaossm</a>
 						</div>
@@ -127,7 +124,7 @@
 					<div class="three wide column">
 						<h4 class="ui inverted header m-text-thin m-text-spaced ">最新博客</h4>
 						<div class="ui inverted link list">
-							<a href="#" class="item">Email: 1600767556@QQ.com</a>
+							<a href="#" class="item">Email 1600767556@QQ.com</a>
 							<a href="#" class="item">QQ : 1600767556</a>
 							<a href="#" class="item">WeChat : shoashaossm</a>
 						</div>

@@ -44,7 +44,7 @@
 			<div class="ui container">
 				<div class="ui success targe message">
 					<h3>欢迎回来</h3>
-					<p>秋水墨色染</p>
+					<span th:text="${session.user.nickname}">秋水墨色染 </span>
 					<div class="item">
 						<img src="../../static/images/welcome.png" th:src="@{/images/welcome.png}" class="ui rounded image" alt="" style=" margin-left: 100px ;width: 60%" height="60%">
 					</div>
@@ -91,7 +91,7 @@
 			</div>
 
 		</footer>
-		<!--/*/<th:block th:replace="admin/_fragments :: script"/*/-->
+		<!--/*/<th:block th:replace="admin/_fragments :: script">/*/-->
 		<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
 		<!--/*/	</th:block>/*/-->
