@@ -33,14 +33,14 @@ public class IndexController {
     private TagService tagService;
 
     @GetMapping("/")
-    public String Index(@PageableDefault(size = 5,
+    public String Index(@PageableDefault(size = 6,
             sort = {"updateTime"},
             direction = Sort.Direction.DESC)
                                 Pageable pageable, Model model) {
         model.addAttribute("page", blogsService.listBlog(pageable));
-        model.addAttribute("types", typeService.listTypeTop(6));
+        model.addAttribute("types", typeService.listTypeTop(5));
         model.addAttribute("tags", tagService.listTagTop(10));
-        model.addAttribute("recommendBlogs", blogsService.listRecommendBlogTop(8));
+        model.addAttribute("recommendBlogs", blogsService.listRecommendBlogTop(5));
         return "index";
     }
 
